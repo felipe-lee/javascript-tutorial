@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Object-oriented JavaScript example</title>
+</head>
+
+<body>
+<p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+
+</body>
+
+<script>
+    function Person(first, last, age, gender, pronoun, interests) {
+        this.name = {
+            'first': first,
+            'last': last,
+        };
+
+        this.age = age;
+        this.gender = gender;
+        this.pronoun = pronoun;
+        this.interests = interests;
+
+        let interestsStatement = 'likes ';
+        for (let i = 0; this.interests.length > i; i++) {
+            if (this.interests.length - 1 === i) {
+                interestsStatement += this.interests[i] + '.';
+            } else if (this.interests.length - 2 === i) {
+                if (this.interests.length > 2) {
+                    interestsStatement += this.interests[i] + ', and ';
+                } else {
+                    interestsStatement += this.interests[i] + ' and ';
+                }
+            } else {
+                interestsStatement += this.interests[i] + ', ';
+            }
+        }
+
+        if (this.interests.length === 0) {
+            interestsStatement = 'doesn\'t like anything!';
+        }
+
+        if (this.pronoun === 'they') {
+            interestsStatement = interestsStatement.replace(/likes/, 'like').replace(/doesn't/, 'don\'t');
+            console.log(this.name.first + '\'s pronoun is ' + self.pronoun)
+        }
+
+        this.bio = this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. ' +
+            this.pronoun.charAt(0).toUpperCase() + this.pronoun.slice(1) + ' ' + interestsStatement;
+
+        this.announceBio = function () {
+            alert(bio);
+        };
+
+        this.greeting = function () {
+            alert('Hi! I\'m ' + this.name + '.');
+        };
+    }
+
+    let p1 = new Person('Bob', 'Smith', 32, 'male', 'he', ['music', 'skiing']);
+    let p2 = new Person('Jane', 'Smith', 22, 'female', 'she', ['movies', 'tv', 'games']);
+    let p3 = new Person('Zane', 'Smith', 32, 'non-binary', 'they', ['flying']);
+    let p4 = new Person('Psi', 'Smith', 32, 'gender neutral', 'ze', ['driving', 'running']);
+    let p5 = new Person('Ace', 'Smith', 32, 'gender neutral', 'they', []);
+</script>
+</html>
