@@ -41,7 +41,7 @@ Person.prototype.bio = function () {
         interestsStatement = 'doesn\'t like anything!';
     }
 
-    if (this.pronoun === 'they') {
+    if (this.pronoun.toLowerCase() === 'they') {
         interestsStatement = interestsStatement.replace(/likes/, 'like').replace(/doesn't/, 'don\'t');
         console.log(this.name.first + '\'s pronoun is ' + this.pronoun)
     }
@@ -57,4 +57,31 @@ Person.prototype.bio = function () {
  */
 Person.prototype.farewell = function () {
     alert(this.name.first + ' has left the building. Bye for now!');
+};
+
+// Teacher type
+function Teacher(first, last, age, gender, pronoun, interests, subject) {
+    Person.call(this, first, last, age, gender, pronoun, interests);
+
+    this.subject = subject;
+}
+
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
+
+/* method: Teacher::greeting()
+ * greets user with a teacher appropriate greeting.
+ */
+Teacher.prototype.greeting = function () {
+    let prefix = '';
+
+    if (this.gender.toLowerCase() === 'male') {
+        prefix = 'Mr.';
+    } else if (this.gender.toLowerCase() === 'female') {
+        prefix = 'Ms.';
+    } else {
+        prefix = 'Mx.';
+    }
+
+    alert('Hello, my name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
 };
