@@ -55,7 +55,15 @@ class Teacher extends Person {
     constructor(first, last, age, gender, pronoun, interests, subject) {
         super(first, last, age, gender, pronoun, interests);
 
-        this.subject = subject;
+        this._subject = subject;
+    }
+
+    get subject() {
+        return this._subject;
+    }
+
+    set subject(newSubject) {
+        this._subject = newSubject;
     }
 
     greeting() {
