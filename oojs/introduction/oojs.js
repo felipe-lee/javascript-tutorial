@@ -85,3 +85,36 @@ Teacher.prototype.greeting = function () {
 
     alert('Hello, my name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
 };
+
+// Student type
+function Student(first, last, age, gender, pronoun, interests, year) {
+    Person.call(this, first, last, age, gender, pronoun, interests);
+
+    this.year = year;
+}
+
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+/* method: Student::greeting()
+ * greets user with a Student appropriate greeting.
+ */
+Student.prototype.greeting = function () {
+    let yearString = '';
+
+    switch (this.year) {
+        case 1:
+            yearString = 'freshman';
+            break;
+        case 2:
+            yearString = 'sophomore';
+            break;
+        case 3:
+            yearString = 'junior';
+            break;
+        default:
+            yearString = 'senior';
+    }
+
+    alert('Hey, I\'m ' + this.name.first + '. I\'m a ' + yearString + '.');
+};
