@@ -10,72 +10,12 @@
 
 </body>
 
+<script src="oojs.js"></script>
 <script>
-    // Person type
-    function Person(first, last, age, gender, pronoun, interests) {
-        this.name = {
-            'first': first,
-            'last': last,
-        };
-
-        this.age = age;
-        this.gender = gender;
-        this.pronoun = pronoun;
-        this.interests = interests;
-    }
-
     let p1 = new Person('Bob', 'Smith', 32, 'male', 'he', ['music', 'skiing']);
     let p2 = new Person('Jane', 'Smith', 22, 'female', 'she', ['movies', 'tv', 'games']);
     let p3 = new Person('Zane', 'Smith', 32, 'non-binary', 'they', ['flying']);
     let p4 = new Person('Psi', 'Smith', 32, 'gender neutral', 'ze', ['driving', 'running']);
     let p5 = new Person('Ace', 'Smith', 32, 'gender neutral', 'they', []);
-
-    /* method: Person::greeting()
-     * alerts user with greeting from person.
-    */
-    Person.prototype.greeting = function () {
-        alert('Hi! I\'m ' + this.name.first + ' ' + this.name.last + '.');
-    };
-
-    /* method: Person::announceBio()
-     * alert user about person's bio.
-    */
-    Person.prototype.announceBio = function () {
-        let interestsStatement = 'likes ';
-        for (let i = 0; this.interests.length > i; i++) {
-            if (this.interests.length - 1 === i) {
-                interestsStatement += this.interests[i] + '.';
-            } else if (this.interests.length - 2 === i) {
-                if (this.interests.length > 2) {
-                    interestsStatement += this.interests[i] + ', and ';
-                } else {
-                    interestsStatement += this.interests[i] + ' and ';
-                }
-            } else {
-                interestsStatement += this.interests[i] + ', ';
-            }
-        }
-
-        if (this.interests.length === 0) {
-            interestsStatement = 'doesn\'t like anything!';
-        }
-
-        if (this.pronoun === 'they') {
-            interestsStatement = interestsStatement.replace(/likes/, 'like').replace(/doesn't/, 'don\'t');
-            console.log(this.name.first + '\'s pronoun is ' + this.pronoun)
-        }
-
-        let bio = this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. ' +
-            this.pronoun.charAt(0).toUpperCase() + this.pronoun.slice(1) + ' ' + interestsStatement;
-
-        alert(bio);
-    };
-
-    /* method: Person::farewell()
-     * alerts user that person has left.
-     */
-    Person.prototype.farewell = function () {
-        alert(this.name.first + ' has left the building. Bye for now!');
-    };
 </script>
 </html>
