@@ -141,6 +141,26 @@ class EvilCircle extends Shape {
 
                     ballsAlive--;
                     ballsCount.textContent = ballsAlive;
+
+                    if (ballsAlive === 0) {
+                        let img = document.createElement('img');
+                        img.setAttribute('src', 'https://i.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.webp');
+
+                        let body = document.querySelector('body');
+                        body.appendChild(img);
+
+                        body.removeChild(canvas);
+
+                        let header = document.getElementById('main-header');
+
+                        body.removeChild(header);
+
+                        let ballTracker = document.getElementById('balls-count-tracker');
+
+                        body.removeChild(ballTracker);
+
+                        alert(`You've eaten all the balls! You iridescent moon beam.`);
+                    }
                 }
             }
         }
