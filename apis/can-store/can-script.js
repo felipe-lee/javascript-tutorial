@@ -4,16 +4,32 @@ var products;
 // use fetch to retrieve it, and report any errors that occur in the fetch operation
 // once the products have been successfully loaded and formatted as a JSON object
 // using response.json(), run the initialize() function
-fetch('products.json').then(function (response) {
-    if (response.ok) {
-        response.json().then(function (json) {
-            products = json;
-            initialize();
-        });
+// fetch('products.json').then(function (response) {
+//     if (response.ok) {
+//         response.json().then(function (json) {
+//             products = json;
+//             initialize();
+//         });
+//     } else {
+//         console.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
+//     }
+// });
+
+let request = new XMLHttpRequest();
+
+request.open('GET', 'products.json');
+request.responseType = 'json';
+
+request.addEventListener('load', function () {
+    if (this.status === 200) {
+        products = this.response;
+        initialize();
     } else {
-        console.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
+        console.log('Network request for products.json failed with response ' + this.status + ': ' + this.statusText);
     }
 });
+
+request.send();
 
 // sets up the app logic, declares required variables, contains all the other functions
 function initialize() {
@@ -148,19 +164,35 @@ function initialize() {
         var url = 'images/' + product.image;
         // Use fetch to fetch the image, and convert the resulting response to a blob
         // Again, if any errors occur we report them in the console.
-        fetch(url).then(function (response) {
-            if (response.ok) {
-                response.blob().then(function (blob) {
-                    // Convert the blob to an object URL — this is basically an temporary internal URL
-                    // that points to an object stored inside the browser
-                    objectURL = URL.createObjectURL(blob);
-                    // invoke showProduct
-                    showProduct(objectURL, product);
-                });
+        // fetch(url).then(function (response) {
+        //     if (response.ok) {
+        //         response.blob().then(function (blob) {
+        //             // Convert the blob to an object URL — this is basically an temporary internal URL
+        //             // that points to an object stored inside the browser
+        //             objectURL = URL.createObjectURL(blob);
+        //             // invoke showProduct
+        //             showProduct(objectURL, product);
+        //         });
+        //     } else {
+        //         console.log('Network request for "' + product.name + '" image failed with response ' + response.status + ': ' + response.statusText);
+        //     }
+        // });
+        let imageRequest = new XMLHttpRequest();
+
+        imageRequest.open('GET', url);
+        imageRequest.responseType = 'blob';
+
+        imageRequest.addEventListener('load', function () {
+            if (this.status === 200) {
+                objectURL = URL.createObjectURL(this.response);
+
+                showProduct(objectURL, product);
             } else {
-                console.log('Network request for "' + product.name + '" image failed with response ' + response.status + ': ' + response.statusText);
+                console.log('Network request for "' + product.name + '" image failed with response ' + this.status + ': ' + this.statusText);
             }
         });
+
+        imageRequest.send();
     }
 
     // Display a product inside the <main> element
