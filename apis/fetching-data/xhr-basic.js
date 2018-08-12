@@ -13,16 +13,11 @@ function updateDisplay(verse) {
 
     let url = `${verse}.txt`;
 
-    let request = new XMLHttpRequest();
-
-    request.open('GET', url);
-    request.responseType = 'text';
-
-    request.addEventListener('load', function () {
-        poemDisplay.textContent = request.response;
+    fetch(url).then(function (response) {
+        response.text().then(function (text) {
+            poemDisplay.textContent = text;
+        });
     });
-
-    request.send();
 }
 
 updateDisplay('Verse 1');
