@@ -37,7 +37,7 @@ function submitSearch(event) {
 function fetchResults(event) {
     event.preventDefault();
 
-    url = `${baseURL}?api-key${key}&page=${pageNumber}&q=${searchTerm.value}&fq=document_type:("article")`;
+    url = `${baseURL}?api-key=${key}&page=${pageNumber}&q=${searchTerm.value}&fq=document_type:("article")`;
 
     if (startDate.value !== '') {
         url += `&begin_date=${startDate.value}`;
@@ -111,11 +111,11 @@ function displayResults(json) {
             heading.appendChild(link);
 
             article.appendChild(img);
-            artcile.appendChild(para1);
+            article.appendChild(para1);
             article.appendChild(para2);
             article.appendChild(clearfix);
 
-            section.appendChild(artcile);
+            section.appendChild(article);
         }
     }
 }
