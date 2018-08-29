@@ -20,3 +20,14 @@ let triHeight = 50 * Math.tan(degToRad(60));
 ctx.lineTo(100, 50 + triHeight);
 ctx.lineTo(50, 50);
 ctx.fill();
+
+ctx.fillStyle = 'rgb(0, 0, 255)';
+ctx.beginPath();
+ctx.arc(150, 106, 50, degToRad(0), degToRad(360), false);
+ctx.fill();
+
+ctx.fillStyle = 'yellow';
+ctx.beginPath();
+ctx.arc(200, 106, 50, degToRad(-45), degToRad(45), true);
+ctx.lineTo(200, 106);
+ctx.fill();
